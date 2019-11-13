@@ -119,10 +119,10 @@ describe "test-04-01: /orgs/Netflix/members object count = "
 
 COUNT=$(curl -s "$BASE_URL/orgs/Netflix/members" |jq -r '. |length')
 
-if [[ $COUNT -gt 6 ]] && [[ $COUNT -lt 11 ]]; then
+if [[ $COUNT -gt 6 ]] && [[ $COUNT -lt 12 ]]; then
     pass
 else
-    fail "$COUNT" "6..11"
+    fail "$COUNT" "6..12"
 fi
 
 describe "test-04-02: /orgs/Netflix/members login first alpha case-insensitive = "
@@ -199,10 +199,10 @@ describe "test-05-01: /orgs/Netflix/repos object count = "
 
 COUNT=$(curl -s "$BASE_URL/orgs/Netflix/repos" |jq -r '. |length')
 
-if [[ $COUNT -gt 30 ]] && [[ $COUNT -lt 177 ]]; then
+if [[ $COUNT -gt 29 ]] && [[ $COUNT -lt 177 ]]; then
     pass
 else
-    fail "$COUNT" "127..177"
+    fail "$COUNT" "29..177"
 fi
 
 describe "test-05-02: /orgs/Netflix/repos full_name first alpha case-insensitive = "
@@ -249,40 +249,40 @@ describe "test-05-06: /orgs/Netflix/repos id last = "
 
 VALUE=$(curl -s "$BASE_URL/orgs/Netflix/repos" |jq -r '.[] |.id' |sort -n |tail -1)
 
-if [[ "$VALUE" == "184627693" ]]; then
+if [[ "$VALUE" == "9533057" ]]; then
     pass
 else
-    fail "$VALUE" "184627693"
+    fail "$VALUE" "9533057"
 fi
 
 describe "test-05-07: /orgs/Netflix/repos languages unique = "
 
 VALUE=$(curl -s "$BASE_URL/orgs/Netflix/repos" |jq -r '.[] |.language' |sort -u |tr '\n' ':')
 
-if [[ "$VALUE" == "C:C#:C++:Clojure:D:Dockerfile:Go:Groovy:HTML:Java:JavaScript:Python:Ruby:Scala:Shell:null:" ]]; then
+if [[ "$VALUE" == "Groovy:HTML:Java:Python:Scala:Shell:null:" ]]; then
     pass
 else
-    fail "$VALUE" "C:C#:C++:Clojure:D:Dockerfile:Go:Groovy:HTML:Java:JavaScript:Python:Ruby:Scala:Shell:null:"
+    fail "$VALUE" "Groovy:HTML:Java:Python:Scala:Shell:null:"
 fi
 
 describe "test-06-01: /view/top/5/forks = "
 
 VALUE=$(curl -s "$BASE_URL/view/top/5/forks" |tr -d '\n' |sed -e 's/ //g')
 
-if [[ "$VALUE" == '[["Netflix/Hystrix",3518],["Netflix/eureka",2077],["Netflix/zuul",1445],["Netflix/SimianArmy",1039],["Netflix/ribbon",711]]' ]]; then
+if [[ "$VALUE" == '[["Netflix/Hystrix",3844],["Netflix/eureka",2417],["Netflix/zuul",1675],["Netflix/SimianArmy",1073],["Netflix/ribbon",805]]' ]]; then
     pass
 else
-    fail "$VALUE" '[["Netflix/Hystrix",3518],["Netflix/eureka",2077],["Netflix/zuul",1445],["Netflix/SimianArmy",1039],["Netflix/ribbon",711]]'
+    fail "$VALUE" '[["Netflix/Hystrix",3844],["Netflix/eureka",2417],["Netflix/zuul",1675],["Netflix/SimianArmy",1073],["Netflix/ribbon",805]]'
 fi
 
 describe "test-06-02: /view/top/10/forks = "
 
 VALUE=$(curl -s "$BASE_URL/view/top/10/forks" |tr -d '\n' |sed -e 's/ //g')
 
-if [[ "$VALUE" == '[["Netflix/Hystrix",3518],["Netflix/eureka",2077],["Netflix/zuul",1445],["Netflix/SimianArmy",1039],["Netflix/ribbon",711],["Netflix/security_monkey",673],["Netflix/conductor",538],["Netflix/Cloud-Prize",488],["Netflix/chaosmonkey",455],["Netflix/asgard",437]]' ]]; then
+if [[ "$VALUE" == '[["Netflix/Hystrix",3844],["Netflix/eureka",2417],["Netflix/zuul",1675],["Netflix/SimianArmy",1073],["Netflix/ribbon",805],["Netflix/Cloud-Prize",481],["Netflix/archaius",439],["Netflix/asgard",437],["Netflix/curator",429],["Netflix/astyanax",372]]' ]]; then
     pass
 else
-    fail "$VALUE" '[["Netflix/Hystrix",3518],["Netflix/eureka",2077],["Netflix/zuul",1445],["Netflix/SimianArmy",1039],["Netflix/ribbon",711],["Netflix/security_monkey",673],["Netflix/conductor",538],["Netflix/Cloud-Prize",488],["Netflix/chaosmonkey",455],["Netflix/asgard",437]]'
+    fail "$VALUE" '[["Netflix/Hystrix",3844],["Netflix/eureka",2417],["Netflix/zuul",1675],["Netflix/SimianArmy",1073],["Netflix/ribbon",805],["Netflix/Cloud-Prize",481],["Netflix/archaius",439],["Netflix/asgard",437],["Netflix/curator",429],["Netflix/astyanax",372]]'
 fi
 
 describe "test-06-03: /view/top/5/last_updated = "

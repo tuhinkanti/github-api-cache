@@ -32,7 +32,7 @@ import static com.github.api.cache.CacheServiceConstants.NETFLIX_ORG_REPOS_URL;
 public class CacheServiceImpl implements CacheService {
 
     private static final Logger logger = LoggerFactory.getLogger(CacheServiceImpl.class);
-    private static final int CACHE_SIZE = 100;
+    private static final int CACHE_SIZE = 10000;
 
     private String authorizationToken;
 
@@ -122,7 +122,7 @@ public class CacheServiceImpl implements CacheService {
         JsonNode cachedJsonValue = getValueFromCache(NETFLIX_ORG_REPOS_URL);
         ArrayNode jsonNodesArray = (ArrayNode) cachedJsonValue;
         Iterator<JsonNode> forksIterator = jsonNodesArray.elements();
-        while(forksIterator.hasNext()) {
+        while (forksIterator.hasNext()) {
             JsonNode jsonNode = forksIterator.next();
             List<Object> element = new ArrayList<>();
             element.add(jsonNode.get("full_name").asText());
@@ -131,10 +131,9 @@ public class CacheServiceImpl implements CacheService {
         }
 
         viewsList = viewsList.stream()
-                .limit(n)
-                .sorted((f1,f2) -> Integer.parseInt(f2.get(1).toString()) - Integer.parseInt(f1.get(1).toString()))
+                .sorted((f1, f2) -> Integer.parseInt(f2.get(1).toString()) - Integer.parseInt(f1.get(1).toString()))
                 .collect(Collectors.toList());
-        return viewsList;
+        return viewsList.stream().limit(n).collect(Collectors.toList());
     }
 
     @Override
@@ -143,7 +142,7 @@ public class CacheServiceImpl implements CacheService {
         JsonNode cachedJsonValue = getValueFromCache(NETFLIX_ORG_REPOS_URL);
         ArrayNode jsonNodesArray = (ArrayNode) cachedJsonValue;
         Iterator<JsonNode> forksIterator = jsonNodesArray.elements();
-        while(forksIterator.hasNext()) {
+        while (forksIterator.hasNext()) {
             JsonNode jsonNode = forksIterator.next();
             List<Object> element = new ArrayList<>();
             element.add(jsonNode.get("full_name").asText());
@@ -152,10 +151,9 @@ public class CacheServiceImpl implements CacheService {
         }
 
         viewsList = viewsList.stream()
-                .limit(n)
-                .sorted((f1,f2) -> Instant.parse(f2.get(1).toString()).compareTo(Instant.parse(f1.get(1).toString())))
+                .sorted((f1, f2) -> Instant.parse(f2.get(1).toString()).compareTo(Instant.parse(f1.get(1).toString())))
                 .collect(Collectors.toList());
-        return viewsList;
+        return viewsList.stream().limit(n).collect(Collectors.toList());
     }
 
     @Override
@@ -164,7 +162,7 @@ public class CacheServiceImpl implements CacheService {
         JsonNode cachedJsonValue = getValueFromCache(NETFLIX_ORG_REPOS_URL);
         ArrayNode jsonNodesArray = (ArrayNode) cachedJsonValue;
         Iterator<JsonNode> forksIterator = jsonNodesArray.elements();
-        while(forksIterator.hasNext()) {
+        while (forksIterator.hasNext()) {
             JsonNode jsonNode = forksIterator.next();
             List<Object> element = new ArrayList<>();
             element.add(jsonNode.get("full_name").asText());
@@ -173,10 +171,9 @@ public class CacheServiceImpl implements CacheService {
         }
 
         viewsList = viewsList.stream()
-                .limit(n)
-                .sorted((f1,f2) -> Integer.parseInt(f2.get(1).toString()) - Integer.parseInt(f1.get(1).toString()))
+                .sorted((f1, f2) -> Integer.parseInt(f2.get(1).toString()) - Integer.parseInt(f1.get(1).toString()))
                 .collect(Collectors.toList());
-        return viewsList;
+        return viewsList.stream().limit(n).collect(Collectors.toList());
     }
 
     @Override
@@ -185,7 +182,7 @@ public class CacheServiceImpl implements CacheService {
         JsonNode cachedJsonValue = getValueFromCache(NETFLIX_ORG_REPOS_URL);
         ArrayNode jsonNodesArray = (ArrayNode) cachedJsonValue;
         Iterator<JsonNode> forksIterator = jsonNodesArray.elements();
-        while(forksIterator.hasNext()) {
+        while (forksIterator.hasNext()) {
             JsonNode jsonNode = forksIterator.next();
             List<Object> element = new ArrayList<>();
             element.add(jsonNode.get("full_name").asText());
@@ -194,9 +191,8 @@ public class CacheServiceImpl implements CacheService {
         }
 
         viewsList = viewsList.stream()
-                .limit(n)
-                .sorted((f1,f2) -> Integer.parseInt(f2.get(1).toString()) - Integer.parseInt(f1.get(1).toString()))
+                .sorted((f1, f2) -> Integer.parseInt(f2.get(1).toString()) - Integer.parseInt(f1.get(1).toString()))
                 .collect(Collectors.toList());
-        return viewsList;
+        return viewsList.stream().limit(n).collect(Collectors.toList());
     }
 }
