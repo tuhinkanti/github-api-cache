@@ -209,20 +209,20 @@ describe "test-05-02: /orgs/Netflix/repos full_name first alpha case-insensitive
 
 VALUE=$(curl -s "$BASE_URL/orgs/Netflix/repos" |jq -r '.[] |.full_name' |tr '[:upper:]' '[:lower:]' |sort |head -1)
 
-if [[ "$VALUE" == "netflix/aegisthus" ]]; then
+if [[ "$VALUE" == "netflix/aminator" ]]; then
     pass
 else
-    fail "$VALUE" "netflix/aegisthus"
+    fail "$VALUE" "netflix/aminator"
 fi
 
 describe "test-05-03: /orgs/Netflix/members full_name first alpha case-sensitive = "
 
 VALUE=$(curl -s "$BASE_URL/orgs/Netflix/repos" |jq -r '.[] |.full_name' |sort |head -1)
 
-if [[ "$VALUE" == "Netflix/AWSObjectMapper" ]]; then
+if [[ "$VALUE" == "Netflix/CassJMeter" ]]; then
     pass
 else
-    fail "$VALUE" "Netflix/AWSObjectMapper"
+    fail "$VALUE" "Netflix/CassJMeter"
 fi
 
 describe "test-05-04: /orgs/Netflix/members login last alpha case-insensitive = "
